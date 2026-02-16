@@ -8,12 +8,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/uploads",express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.json({ message : "Working Fine.." });
+    res.json({ message: "Working Fine.." });
 });
 
 
@@ -21,6 +21,10 @@ app.get("/", (req, res) => {
 //Routes
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
